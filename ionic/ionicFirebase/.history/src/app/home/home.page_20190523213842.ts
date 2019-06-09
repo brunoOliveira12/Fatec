@@ -18,6 +18,7 @@ constructor(public navCtrl: NavController,
       firebaseauth.user.subscribe((data => {
         this.user = data;
       }));
+      this.user = new FormControl('Dayana', Validators.required)
   }
 
 public LoginComEmail(): void {

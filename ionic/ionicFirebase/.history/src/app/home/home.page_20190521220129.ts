@@ -17,7 +17,7 @@ constructor(public navCtrl: NavController,
               public alertCtrl: AlertController) {
       firebaseauth.user.subscribe((data => {
         this.user = data;
-      }));
+      }));     
   }
 
 public LoginComEmail(): void {
@@ -80,9 +80,9 @@ public alterarEmail(): void {
 public excluirUsuario(): void {
   var user = this.firebaseauth.auth.currentUser;
     user.delete().then(function() {
-     // this.exibirMensagem("Usuário excluido com sucesso");      
+      this.exibirMensagem("Usuário excluido com sucesso");      
     }).catch(function(error) {
-     // this.exibirMensagem(String(error));
+      this.exibirMensagem(String(error));
     });
 }
 

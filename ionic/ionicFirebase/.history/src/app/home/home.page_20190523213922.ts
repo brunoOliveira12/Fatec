@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, ToastController, AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ constructor(public navCtrl: NavController,
       firebaseauth.user.subscribe((data => {
         this.user = data;
       }));
+      this.user = new FormControl('Dayana', Validators.required)
   }
 
 public LoginComEmail(): void {

@@ -17,7 +17,7 @@ constructor(public navCtrl: NavController,
               public alertCtrl: AlertController) {
       firebaseauth.user.subscribe((data => {
         this.user = data;
-      }));
+      }));     
   }
 
 public LoginComEmail(): void {

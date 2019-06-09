@@ -17,7 +17,7 @@ constructor(public navCtrl: NavController,
               public alertCtrl: AlertController) {
       firebaseauth.user.subscribe((data => {
         this.user = data;
-      }));
+      }));     
   }
 
 public LoginComEmail(): void {
@@ -38,19 +38,19 @@ public LoginComEmail(): void {
   }
   
   async exibirMensagemConfirmacao() {
-    const confirm = await this.alertCtrl.create({     
+    const confirm = this.alertCtrl.create({     
       message: 'Deseja realmente excluir o usuário?',
       buttons: [
         {
-          text: 'Não',
+          text: 'Disagree',
           handler: () => {
             console.log('Disagree clicked');
           }
         },
         {
-          text: 'Sim',
+          text: 'Agree',
           handler: () => {
-            this.excluirUsuario();
+            console.log('Agree clicked');
           }
         }
       ]
@@ -64,25 +64,25 @@ public cadastrarUsuario(): void {
       this.exibirMensagem("Usuário criado com sucesso");
     })
     .catch((erro: any) => {
-      this.exibirMensagem(String(erro));
+      this.exibirMensagem(erro)
     });
   }
 
 public alterarEmail(): void {
     var user = this.firebaseauth.auth.currentUser;
     user.updateEmail(this.email.value).then(function() {
-      this.exibirMensagem("Usuário alterado com sucesso");
+      this.exibirMensagem("Usuário alterado com sucesso")
     }).catch(function(error) {
-      this.exibirMensagem(String(error));
+      this.exibirMensagem(error)
     });
 }
 
 public excluirUsuario(): void {
   var user = this.firebaseauth.auth.currentUser;
     user.delete().then(function() {
-     // this.exibirMensagem("Usuário excluido com sucesso");      
+      this.exibirMensagem("Usuário excluido com sucesso")      
     }).catch(function(error) {
-     // this.exibirMensagem(String(error));
+      this.exibirMensagem(error)
     });
 }
 
@@ -92,7 +92,7 @@ public Sair(): void {
       this.exibirMensagem("Saiu com sucesso");  
     })
     .catch((erro: any) => {
-      this.exibirMensagem(String(erro));
+      this.exibirMensagem(erro)
     });
   }
 }

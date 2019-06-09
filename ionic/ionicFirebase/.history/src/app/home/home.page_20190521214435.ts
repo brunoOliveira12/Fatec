@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ToastController, AlertController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
@@ -17,7 +17,7 @@ constructor(public navCtrl: NavController,
               public alertCtrl: AlertController) {
       firebaseauth.user.subscribe((data => {
         this.user = data;
-      }));
+      }));     
   }
 
 public LoginComEmail(): void {
@@ -37,52 +37,31 @@ public LoginComEmail(): void {
     toast.present();
   }
   
-  async exibirMensagemConfirmacao() {
-    const confirm = await this.alertCtrl.create({     
-      message: 'Deseja realmente excluir o usuário?',
-      buttons: [
-        {
-          text: 'Não',
-          handler: () => {
-            console.log('Disagree clicked');
-          }
-        },
-        {
-          text: 'Sim',
-          handler: () => {
-            this.excluirUsuario();
-          }
-        }
-      ]
-    });
-    confirm.present();
-  }
-
 public cadastrarUsuario(): void {
     this.firebaseauth.auth.createUserWithEmailAndPassword(this.email.value , this.password.value)
     .then(() => {
       this.exibirMensagem("Usuário criado com sucesso");
     })
     .catch((erro: any) => {
-      this.exibirMensagem(String(erro));
+      this.exibirMensagem(erro)
     });
   }
 
 public alterarEmail(): void {
     var user = this.firebaseauth.auth.currentUser;
     user.updateEmail(this.email.value).then(function() {
-      this.exibirMensagem("Usuário alterado com sucesso");
+      this.exibirMensagem("Usuário alterado com sucesso")
     }).catch(function(error) {
-      this.exibirMensagem(String(error));
+      this.exibirMensagem(error)
     });
 }
 
 public excluirUsuario(): void {
   var user = this.firebaseauth.auth.currentUser;
     user.delete().then(function() {
-     // this.exibirMensagem("Usuário excluido com sucesso");      
+      this.exibirMensagem("Usuário excluido com sucesso")      
     }).catch(function(error) {
-     // this.exibirMensagem(String(error));
+      this.exibirMensagem(error)
     });
 }
 
@@ -92,7 +71,7 @@ public Sair(): void {
       this.exibirMensagem("Saiu com sucesso");  
     })
     .catch((erro: any) => {
-      this.exibirMensagem(String(erro));
+      this.exibirMensagem(erro)
     });
   }
 }
