@@ -10,6 +10,7 @@
         <%@ include file="../menu.jsp" %>
         <div class="col-md-6 col-md-offset-3">
             <h1 align="center">Cadastro de Produtos</h1>
+            
             <form name="cadastro" action="${pageContext.request.contextPath}/SalvarProduto" method="POST" enctype="multipart/form-data">
                 <div class="form-group mb-md" style="padding-top:15px;">
                     <div class="col-md-12">

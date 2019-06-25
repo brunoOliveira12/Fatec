@@ -29,7 +29,7 @@ public class ProdutoDAO implements GenericDAO {
         Produto produto = (Produto) object;
         PreparedStatement stmt = null;
         String sql = "Insert into produto(nome_produto, valor_venda_produto, valor_compra_produto, \n" +
-"            quantidade_estoque_produto, id_categoria, foto_produto)\n" +
+"            quantidade_estoque_produto, id_categoria, foto_produto, desativado)\n" +
 "    VALUES (?, ?, ?, ?, ?, ?)";
         try {
             stmt = conn.prepareStatement(sql);
@@ -39,6 +39,7 @@ public class ProdutoDAO implements GenericDAO {
             stmt.setInt(4, produto.getQuantidadeEstoqueProduto());
             stmt.setInt(5, produto.getCategoria().getIdCategoria());
             stmt.setBinaryStream(6, produto.getFotoProduto(), produto.getFileItem());
+            stmt.setBoolean(7, false);
             stmt.execute();
             return true;
 
@@ -62,7 +63,8 @@ public class ProdutoDAO implements GenericDAO {
         List<Object> resultado = new ArrayList<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        String sql = "select p.*, c.nome_categoria from produto p, categoria c where p.id_categoria = c.id_categoria order by p.nome_produto;";
+        String sql = "select p.*, c.nome_categoria from produto p, categoria c "
+                + "where p.id_categoria = c.id_categoria and p.desativado = false order by p.nome_produto;";
         try {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -93,10 +95,11 @@ public class ProdutoDAO implements GenericDAO {
     @Override
     public void excluir(int idObject) {
     PreparedStatement stmt = null;
-    String sql = "delete from produto where id_produto=?;";
+    String sql = "update produto set desativado=? where id_produto=?;";
     try{
         stmt=conn.prepareStatement(sql);
-        stmt.setInt(1, idObject);
+        stmt.setBoolean(1, true);
+        stmt.setInt(2, idObject);
         stmt.executeUpdate();
     }catch(SQLException ex){
         System.out.println("Problema ao excluir Produto!Erro" +ex.getMessage());
@@ -116,7 +119,8 @@ public class ProdutoDAO implements GenericDAO {
              Produto produto = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        String sql = "select p.*, c.nome_categoria from produto p, categoria c where p.id_categoria = c.id_categoria and p.id_produto=?;";
+        String sql = "select p.*, c.nome_categoria from produto p, categoria c "
+                + "where p.id_categoria = c.id_categoria and p.id_produto=? and p.desativado = false";
         try {
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, idObject);
@@ -150,7 +154,7 @@ public class ProdutoDAO implements GenericDAO {
         Produto produto = (Produto) object;
         PreparedStatement stmt = null;
         String sql = "update produto set nome_produto=?,valor_compra_produto=?, valor_venda_produto=?, quantidade_estoque_produto=?, "
-                + "id_categoria = ? where id_produto=?;";
+                + "id_categoria = ?, desativado=? where id_produto=?;";
         try{
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, produto.getNomeProduto());
@@ -158,7 +162,8 @@ public class ProdutoDAO implements GenericDAO {
             stmt.setDouble(3, produto.getValorVendaProduto());
             stmt.setInt(4, produto.getQuantidadeEstoqueProduto());
             stmt.setInt(5, produto.getCategoria().getIdCategoria());
-            stmt.setInt(6, produto.getIdProduto());
+            stmt.setBoolean(6, false);
+            stmt.setInt(7, produto.getIdProduto());
             stmt.executeUpdate();
             return true;
         }catch(SQLException ex){

@@ -40,30 +40,27 @@ public class SalvarProduto extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, FileUploadException 
-    {
+            throws ServletException, IOException, FileUploadException {
         Produto produto = new Produto();
-         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+        boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         if (isMultipart) {
 
             DiskFileItemFactory factory = new DiskFileItemFactory();
-            ServletFileUpload upload = new ServletFileUpload(factory);
-
+            ServletFileUpload upload = new ServletFileUpload(factory);            
             upload.setSizeMax(50 * 1024 * 1024);
             List items = upload.parseRequest(request);
             Iterator it = items.iterator();
-            InputStream is=null;
-            
+            InputStream is = null;
 
             while (it.hasNext()) {
 
                 FileItem fileItem = (FileItem) it.next();
 
                 if (!fileItem.isFormField()) {
-                   is = fileItem.getInputStream();
-                   produto.setFotoProduto(is);
-                   produto.setFileItem((int) fileItem.getSize());
-                }else {
+                    is = fileItem.getInputStream();
+                    produto.setFotoProduto(is);
+                    produto.setFileItem((int) fileItem.getSize());
+                } else {
                     String dados = fileItem.getFieldName();
                     if (dados.equals("nomeproduto")) {
                         produto.setNomeProduto(fileItem.getString());
@@ -73,32 +70,35 @@ public class SalvarProduto extends HttpServlet {
                         produto.setValorCompraProduto(Double.parseDouble(fileItem.getString()));
                     } else if (dados.equals("valorvendaproduto")) {
                         produto.setValorVendaProduto(Double.parseDouble(fileItem.getString()));
-                    } else if (dados.equals("idcategoria")){
+                    } else if (dados.equals("idcategoria")) {
                         produto.setCategoria(new Categoria(Integer.parseInt(fileItem.getString())));
                     }
                 }
-            }
+            }            
         }
-        
+
         String mensagem = null;
-        
-        try{
-            
+
+        try {
+
             GenericDAO dao = new ProdutoDAO();
-            if (dao.cadastrar(produto)){
-                mensagem = "Produto cadastrado com sucesso!";
+            if (Integer.parseInt(request.getParameter("idproduto")) > 0) {
+                dao.alterar(produto);
             } else {
-                mensagem = "`Problemas ao cadastrar Produto!";
+                if (dao.cadastrar(produto)) {
+                    mensagem = "Produto cadastrado com sucesso!";
+                } else {
+                    mensagem = "`Problemas ao cadastrar Produto!";
+                }
             }
-            
             request.setAttribute("mensagem", mensagem);
             request.getRequestDispatcher("DadosProduto").forward(request, response);
-            
-        } catch(Exception ex){
+
+        } catch (Exception ex) {
             System.out.println("Problemas ao cadastrar produto! Erro: " + ex.getMessage());
             ex.printStackTrace();
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

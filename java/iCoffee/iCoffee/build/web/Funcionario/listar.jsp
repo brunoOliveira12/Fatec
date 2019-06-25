@@ -32,16 +32,15 @@
                                     <th colspan="2">Editar</th>
                                         <c:forEach var="funcionario" items="${funcionarios}">
                                     <tr>
-                                        <td>${funcionario.idFuncionario}</td>
+                                        <td>${funcionario.idPessoa}</td>
                                         <td>${funcionario.nomePessoa}</td>
                                         <td>${funcionario.emailPessoa}</td>
                                         <td>${funcionario.senhaPessoa}</td>
                                         <td>${funcionario.tipoPessoa}</td>
-                                        <td>${funcionario.salarioFuncionario}</td>
-                                        <%--<td>${funcionario.curriculoFuncionario}</td>--%>
+                                        <td>${funcionario.salarioFuncionario}</td>                                        
 
-                                        <td><a href="${pageContext.request.contextPath}/ExcluirFuncionario?idfuncionario=${funcionario.idFuncionario}">Excluir</td>
-                                        <td><a href="${pageContext.request.contextPath}/CarregarFuncionario?idfuncionario=${funcionario.idFuncionario}">Alterar</td>
+                                        <!--<td><a href="${pageContext.request.contextPath}/ExcluirFuncionario?idfuncionario=${funcionario.idPessoa}">Excluir</td>
+                                        <td><a href="${pageContext.request.contextPath}/CarregarFuncionario?idfuncionario=${funcionario.idPessoa}">Alterar</td>-->
                                     </tr>
                                 </c:forEach>
                                 </tr>

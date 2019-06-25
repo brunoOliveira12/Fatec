@@ -46,7 +46,7 @@
                             <span class="input-group-addon">
                                 Senha:&nbsp;&nbsp;&nbsp;&nbsp;
                             </span>
-                            <input type="text" name="senhapessoa" value="${funcionario.senhaFuncionario}" maxlength="100" required autofocus class="form-control" data-parsley-minlength="6" />
+                            <input type="password" name="senhapessoa" value="${funcionario.senhaFuncionario}" maxlength="100" required autofocus class="form-control" data-parsley-minlength="6" />
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                             <span class="input-group-addon">
                                 Salário:&nbsp;&nbsp;&nbsp;
                             </span>
-                            <input type="text" name="salariopessoa" value="${funcionario.salarioFuncionario}" maxlength="100" required autofocus class="form-control" data-parsley-minlength="6" />
+                            <input type="number" name="salariopessoa" value="${funcionario.salarioFuncionario}" maxlength="100" required autofocus class="form-control" data-parsley-minlength="6" />
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e8b6882b-d596-4bf8-95b4-7e81aaafe4a8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select v.data_venda,p.nome_produto,iv.quantidade,iv.valor_venda_produto,v.valor_venda from venda v
+inner join itens_venda iv on v.id_venda = iv.id_venda
+inner join produto p on iv.id_produto = p.id_produto]]>
+	</queryString>
+	<field name="data_venda" class="java.lang.String"/>
+	<field name="nome_produto" class="java.lang.String"/>
+	<field name="quantidade" class="java.lang.Integer"/>
+	<field name="valor_venda_produto" class="java.math.BigDecimal"/>
+	<field name="valor_venda" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="11" width="525" height="57" uuid="fc7320d0-de15-4a0b-97b5-1248f7a05d08"/>
+				<textElement textAlignment="Center">
+					<font size="44"/>
+				</textElement>
+				<text><![CDATA[Itens vendidos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="2" width="164" height="20" uuid="8bd966cd-5961-4f07-9e91-ebe305a93e42"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Nome do produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="2" width="93" height="20" uuid="dea12981-1e0c-44f9-9ebc-3601190e75a8"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="2" width="66" height="20" uuid="36f064c0-0f86-46fc-8f60-fc2303b927ad"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="2" width="100" height="20" uuid="454c5433-43f0-4752-a843-2041601238da"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="59" height="20" uuid="62eb3a24-82fd-422d-b56a-5d70c1cc3875"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="80" y="0" width="164" height="20" uuid="95f596e5-9b26-4009-bf21-010332c3d803"/>
+				<textFieldExpression><![CDATA[$F{nome_produto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="254" y="0" width="74" height="20" uuid="494c51c6-6e63-4a6c-9421-6f5efc7391ed"/>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="347" y="0" width="66" height="20" uuid="9f8211ea-221a-41fe-832b-2b194cae87bc"/>
+				<textFieldExpression><![CDATA[$F{valor_venda_produto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="427" y="0" width="100" height="20" uuid="49bf7fb6-5c32-4957-ac94-971d81adcf1b"/>
+				<textFieldExpression><![CDATA[$F{valor_venda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="66" height="20" uuid="7fb1c621-9294-46d4-b5d7-1e15dfc96c8a"/>
+				<textFieldExpression><![CDATA[$F{data_venda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="153" height="20" uuid="b9b9f762-1bdb-4bf4-86eb-a94b03eaa5cf"/>
+				<text><![CDATA[Bruno oliveira relatorios.]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -108,7 +108,7 @@ public class ClienteDAO implements GenericDAO {
                 cliente.setEmailPessoa(rs.getString("email_pessoa"));
                 cliente.setSenhaPessoa(rs.getString("senha_pessoa"));
                 cliente.setTipoPessoa(rs.getString("tipo_pessoa"));
-                cliente.setDataNascimentoCliente(rs.getString("datanascimentocliente"));
+                cliente.setDataNascimentoCliente(rs.getString("data_nascimento"));
 //                funcionario.setSalarioFuncionario(Double.NEGATIVE_INFINITY);;                
             }
         } catch (SQLException ex) {

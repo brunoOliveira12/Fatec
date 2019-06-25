@@ -31,11 +31,10 @@ public class CarregarProduto extends HttpServlet {
             int idProduto = Integer.parseInt(request.getParameter("idproduto"));
             try {
                 GenericDAO dao = new ProdutoDAO();
-                request.setAttribute("produto", dao.carregar(idProduto));
-
+                request.setAttribute("produto", dao.carregar(idProduto));                
                 dao = new CategoriaDAO();
                 request.setAttribute("categorias", dao.listar());
-                request.getRequestDispatcher("produto/salvarproduto.jsp").forward(request, response);
+                request.getRequestDispatcher("Produto/salvar.jsp").forward(request, response);
 
             } catch (Exception ex) {
                 System.out.println("Problemas ao carregar dados do Produto!  Erro: "

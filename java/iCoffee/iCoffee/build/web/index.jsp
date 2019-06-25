@@ -33,11 +33,7 @@
                 <input type="hidden" name="acao" value="logar" />               
                 <div class="col-md-12 login-do" style="padding-top:15px;">
                     <input type="submit" name="acessar" value="Acessar" class="btn btn-lg btn-success btn-block">
-                </div>
-                <%--<p>Email: <input type="email" name="nomepessoa" required /></p>
-                <p>Senha: <input type="password" name="senhapessoa" required /></p>
-                <input type="hidden" name="acao" value="logar" />
-                <p><input type="submit" name="acessar" value="Acessar" /></p>--%>
+                </div>               
             </form> 
         </div>
     </body>
